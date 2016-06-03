@@ -24,6 +24,10 @@
     <style type="text/css">
 		
 		
+		body {
+			padding-bottom: 60px;
+		}
+		
 		#areanm {
 			font-size: 18px;
 			font-weight: bold;
@@ -270,7 +274,7 @@
 		
 		.zoom-container {
 		margin-left: 5px;
-		margin-top: 85px;
+		margin-top: 30px;
 		position: absolute;
 		left: 0px;
 		top: 0px;
@@ -382,6 +386,57 @@
 			font-weight:bold;
 		}
 		
+				#ChartFooterDiv, .footer {
+			font-weight:600!important;
+			font-size:14px!important;
+			line-height:24px!important;
+			margin: opx 0!important;
+			padding: 5px 0 3px 0!important;
+			font-family: Helvetica,sans-serif!important;
+			color: #414042!important;
+			box-sizing: border-box!important;
+			margin-top:8px;
+		}
+		
+		#submitbut {
+			background-color:#0F8243;
+			display:block;
+			width:200px;
+			text-align:center;
+			font-size:14px;
+			color:white;
+			font-weight:100;
+			text-decoration:underline;
+			width:70px;
+			height:43px;
+			padding-top:12px;
+			margin-right:6px;
+			float:left;
+		}
+		#submitbut:hover {
+			cursor:hand;
+			cursor:pointer;
+			display:block;
+			background-color:rgb(11,93,48)!important;
+			width:200px;
+			text-align:center;
+			font-size:14px;
+			color:white;
+			font-weight:100;
+			text-decoration:underline;
+			width:70px;
+			height:43px;
+			padding-top:12px;
+			margin-right:6px;
+			float:left;
+		}
+		#notesdiv {
+			width:480px;
+		}
+    
+		
+		
+		
     </style>
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -389,21 +444,7 @@
       <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
       <script src="../bower_components/respond/dest/respond.min.js"></script>
     <![endif]-->
-    <script>
-
-
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-37894017-1']);
-		  _gaq.push(['_trackPageview']);
-		
-		
-		  (function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-
-    </script>
+   
 	</head>
 
 	<body>
@@ -437,6 +478,17 @@
                 </div> 
             </div>
 		</div>
+        
+        
+            <div id="ChartFooterDiv">Download this chart</div>
+    
+            <a href="fallback.png" target="_blank"><div id="submitbut">Image</div></a>
+            <a href="data.csv" target="_blank"><div id="submitbut">.csv</div></a>
+            <a href="data.xls" target="_blank"><div id="submitbut">.xls</div></a>
+            
+    
+        
+        
         </div>       
 
         <script src="../lib/jquery-1.11.1.min.js"></script>
@@ -643,9 +695,21 @@
 						createKey(k , graph_unitWidth, graph_unitHeight , margin , innerPadding);							
 						
 								
-	/*					if (graphic.width() < threshold_sm) { d3.selectAll(".keys").style("display", "inline"); }
-						else if (graphic.width() < threshold_md) { d3.selectAll(".keys").style("display", "inline"); }
-						else { */d3.selectAll(".keys").style("display", "inline"); //}
+								
+						if (graphic.width() < threshold_sm) { 
+							d3.select("#svg4").remove();
+							d3.select("#svg5").remove();	
+						} else if (graphic.width() < threshold_md) { 
+							d3.select("#svg4").remove();
+							d3.select("#svg5").remove();
+							d3.select("#svg0").select("#key").remove();
+							d3.select("#svg2").select("#key").remove(); 	
+						} else { 
+							d3.select("#svg4").remove();
+							d3.select("#svg5").remove();
+							d3.select("#svg0").select("#key").remove();
+							d3.select("#svg2").select("#key").remove(); 
+							}
 							
 					
 						// Use the normal d3 pattern - select all path elements (even though they haven't yet been created)
@@ -720,9 +784,30 @@
 							.text(function(d,i){ 
 									return headers[k];
 							})
+						//svg.append("text")
+							//.attr("x" , graph_unitWidth-45)
+							//.attr("y" , 12 )
+							//.attr("id", "varval_"+k)
+							//.attr("class", "percent_label")
+							//.attr("font-weight","bold")
+							//attr("fill","#666")
+							//.text("%")
 							
 							
 						k++;
+					
+					if (graphic.width() < threshold_sm) { 
+							d3.select("#svg4").remove();
+							d3.select("#svg5").remove();	
+						} else if (graphic.width() < threshold_md) { 
+							d3.select("#svg4").remove();
+							d3.select("#svg5").remove();
+						} else { 
+							d3.select("#svg4").remove();
+							d3.select("#svg5").remove();
+							}
+					
+					
 					}
 						
 				} // end for ...
@@ -733,9 +818,9 @@
 				d3.select("#footer").append("p")
 					.text("Source: ")
 					.append("a")
-					.attr("href", "https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk")
+					.attr("href","https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk/datasets/matricesofinternalmigrationmovesbetweenlocalauthoritiesandregionsincludingthecountriesofwalesscotlandandnorthernireland ")
 					.attr("target", "_blank")
-					.html("Internal Migration, ONS");
+					.html("Internal migration, ONS");
 			
 			
 			d3.selectAll(".graphUnitSVGs").call(zoom)
@@ -826,7 +911,9 @@
 //							return xScale(linevalues[0][vals[i]])-3
 //						}
 //					})
-					
+				
+				console.log(d3.select("#varval_"+i).text())
+				console.log(d3.select("#varval_"+i).html())
 				
 				d3.select("#varval_"+i)
 					//.transition()
@@ -839,15 +926,15 @@
 //						}
 //						
 //					})
-					.html(function(){
+					.text(function(){
 						var fmt = d3.format(".1f")
 						if(linevalues[0][vals[i]]=="null"||[vals[i]]=="undefined"){
 							return headers[i];
 						} else if(linevalues[0][vals[i]]=="0"){
-							return "less than 0.01% "+ headers[i];;
+							return "less than 0.01% "+ headers[i];
 						} else {
-							return /*numFormat*/headers[i]+ ": <tspan id='boldtext'>"+fmt(linevalues[0][vals[i]])+" </tspan>per 1,000";
-							//return /*numFormat*/headers[i]+ ": <tspan id='boldtext'>"+fmt(linevalues[0][vals[i]])+"% </tspan>";
+							 return /*numFormat*/headers[i]+ ": "+fmt(linevalues[0][vals[i]]) + " per 1,000 residents";
+							//return /*numFormat*/fmt(linevalues[0][vals[i]])+" "+headers[i];;
 						}
 					})
 					
@@ -1102,7 +1189,7 @@
 		
 				y = d3.scale.linear()
 					.domain([breaks[0], breaks[dvc.essential.breakDivisions]]) /*range for data*/
-					.range([graph_unitHeight-100, 0]); /*range for pixels*/
+					.range([graph_unitHeight-140, 0]); /*range for pixels*/
 		
 				key_svg =$("#key_svg").width()
 		
@@ -1130,7 +1217,7 @@
 					.tickValues(color.domain());
 	
 				svgkey.append("rect")
-					.attr("transform", "translate(0,18)")
+					.attr("transform",  "translate("+(graph_unitWidth-54)+",18)")
 					.attr("height",graph_unitHeight)
 					.attr("width", 40)
 					.style("fill", "#fff")
@@ -1138,7 +1225,7 @@
 					.style("opacity",0.8);
 			
 				var g = svgkey.append("g")
-					.attr("transform", "translate("+(graph_unitWidth-50)+",10)");
+					.attr("transform", "translate("+(graph_unitWidth-50)+",30)");
 					
 //				var g2 = details.append("g")
 //					.attr("transform", "translate(10,0)");
@@ -1160,10 +1247,13 @@
 				
 				g.call(yAxis).append("text");
 
-					d3.select("#svg4").remove();
-					d3.select("#svg5").remove();
+					//d3.select("#svg4").remove();
+					//d3.select("#svg5").remove();
 					//d3.select("#svg0").select("#key").remove();
 					//d3.select("#svg2").select("#key").remove();
+					
+				
+			
 
 				
 //				g2.selectAll("rect")
@@ -1303,7 +1393,7 @@
 			var areanames =  dvc.data.map(function(d) { return d.AREANM; })
 			
 			var menuarea = d3.zip(areanames,areacodes).sort(function(a, b){ return d3.ascending(a[0], b[0]); }).	filter(function(d){  				
-				return d[1].substr(0,1) == "E" || d[1].substr(0,1) == "W"
+				return d[1].substr(0,1) == "E"
 			})
 			
 						
@@ -1384,6 +1474,7 @@
 				$('#collapse').toggle(); 
 				$('#expand').toggle();        
 		});		
+		
 		</script>
          
         <script>
@@ -1403,7 +1494,8 @@
 		  })();
 
 
-    </script>    
+    </script>   
+     
     
   </body>
 </html>

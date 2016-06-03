@@ -6,7 +6,7 @@
 			
         
             "dateFormat":"%Y",
-            "colour": ["#edf8e9","#bae4b3","#74c476","#31a354","#006d2c"],
+            "colour": ["#bf812d","#dfc27d","#f6e8c3","#80cdc1","#35978f"],
             "legendLabels" : [ ],
             "annotationChart": [
             ],
@@ -27,10 +27,10 @@
             "yAxisScaleDivisor":1,
             "yAxisBreak": false,
             "yAxisBreak_sm_md_lg": [65,65,65] ,
-			"numRows_sm_md_lg":[3,3,2],
-			"numColumns_sm_md_lg":[2,2,3],
+			"numRows_sm_md_lg":[1,1,1],
+			"numColumns_sm_md_lg":[1,1,1],
 			"breakDivisions":5,
-            "breaks" : [[23,36,50,70,90,119],[23,36,50,70,90,119],[-27,-14,0,2,6,18],[23,36,50,70,90,119],[23,36,50,70,90,119],[23,36,50,70,90,119]]
+            "breaks" : [[-27,-15,-5,0,6,18],[-27,-15,-5,0,6,18],[-27,-15,-5,0,6,18],[-27,-15,-5,0,6,18],[-27,-15,-5,0,6,18],[-27,-15,-5,0,6,18]]
     },
     "optional" : {
             "margin_sm": [5, 5, 0, 5],
